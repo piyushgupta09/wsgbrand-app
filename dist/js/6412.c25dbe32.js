@@ -1,0 +1,2 @@
+"use strict";(self["webpackChunkwsgbrand_app_v1"]=self["webpackChunkwsgbrand_app_v1"]||[]).push([[6412],{9724:function(e,n,r){r.r(n),r.d(n,{default:function(){return d}});var t=r(4108);function a(e,n,r,a,c,s){const o=(0,t.E1)("ledger-chat-section");return(0,t.Wz)(),(0,t.Az)(o,{module:"vendor"})}var c=r(7068),s={name:"LedgerChatsPage",components:{LedgerChatSection:c.c}},o=r(4100);const u=(0,o.c)(s,[["render",a]]);var d=u}}]);
+//# sourceMappingURL=6412.c25dbe32.js.map
