@@ -10,7 +10,7 @@
         <div v-if="myDash.tables && myDash.tables.length" class="mb-3">
             <div v-for="(tables, tablesIndex) in myDash.tables" :key="tablesIndex">
                 <div v-for="(table, tableIndex) in tables" :key="tableIndex" class="row mb-3">
-                    <div v-if="table" class="col-lg-6">
+                    <div v-if="table && table.body && table.body.length" class="col-lg-6">
                         <p class="p-1 w-100 fw-bold text-bg-dark text-center mb-0 ls-1">{{ table.caption }}</p>        
                         <table class="table caption-top table-borderless table-striped table-sm my-0">
                             <dash-table-head v-if="table.head && table.head.length" :thead="table.head" />

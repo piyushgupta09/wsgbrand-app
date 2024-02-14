@@ -26,7 +26,7 @@
                 </div>
 
                 <div class="btn-group d-flex">
-                    <router-link :to="{ name: 'FactoryLedgerDetail', params: { ledger: dispatch.ledger_sid } }" 
+                    <router-link :to="getLedgerDetailPageRoute" 
                         class="btn btn-sm btn-outline-dark flex-fill rounded-0 border-secondary border-start-0">
                         <i class="bi bi-chevron-left"></i>
                         <span class="ps-2">Ledger</span>
@@ -36,7 +36,7 @@
                         :data-bs-dispatch-sid="dispatch.sid" aria-controls="dispatchOrderModal">
                         Show Details
                     </button>
-                    <router-link v-if="dispatch.is_billed" :to="{ name: 'FactoryLedgerDetail', params: { ledger: dispatch.ledger_sid } }" 
+                    <router-link v-if="dispatch.is_billed" :to="getBillPageRoute" 
                         class="btn btn-sm btn-outline-dark flex-fill rounded-0 border-secondary border-end-0">
                         <span class="pe-2">Bill</span>
                         <i class="bi bi-chevron-right"></i>
@@ -79,10 +79,29 @@ export default {
     },
     computed: {
         isBrand() {
-            return this.$store.getters['authy/getPrefix'] === 'brand';
+            return this.prefix === 'brand';
         },
         isParty() {
-            return this.$store.getters['authy/getPrefix'] !== 'brand';
+            return this.prefix !== 'brand';
+        },
+        prefix() {
+            return this.$store.getters['authy/getPrefix'];
+        },
+        getLedgerDetailPageRoute() {
+            switch (this.prefix) {
+                case 'brand': return { name: 'BrandProductLedger', params: { ledger: this.dispatch.ledger_sid } };
+                case 'factory': return { name: 'FactoryLedgerDetail', params: { ledger: this.dispatch.ledger_sid } };
+                case 'vendor': return { name: 'VendorLedgerDetail', params: { ledger: this.dispatch.ledger_sid } };
+                default: return { name: 'Home' };
+            }
+        },
+        getBillPageRoute() {
+            switch (this.prefix) {
+                case 'brand': return { name: 'BrandPurchases', query: { search: this.dispatch.is_billed } };
+                case 'factory': return { name: 'FactorySales', query: { search: this.dispatch.is_billed } };
+                case 'vendor': return { name: 'VendorSales', query: { search: this.dispatch.is_billed } };
+                default: return { name: 'Home' };
+            }
         },
     },
     methods: {

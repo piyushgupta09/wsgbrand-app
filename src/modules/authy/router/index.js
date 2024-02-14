@@ -20,11 +20,11 @@ const routes = [
                 name: 'Login',
                 component: () => import('../pages/guest/LoginAccount.vue')
             },
-            {
-                path: 'register',
-                name: 'Register',
-                component: () => import('../pages/guest/RegisterAccount.vue')
-            },
+            // {
+            //     path: 'register',
+            //     name: 'Register',
+            //     component: () => import('../pages/guest/RegisterAccount.vue')
+            // },
         ]
     },
     // Authenticated but not Verified

@@ -10,7 +10,7 @@
 
         <div class="form-floating mb-3">
           <input type="text" id="inputUsername" class="form-control" v-model="form.username" placeholder="name@example.com">
-          <label for="inputUsername">Email Id</label>
+          <label for="inputUsername">Mobile no.</label>
         </div>
 
         <div v-if="!loginViaOtp" class="form-floating mb-3">
@@ -18,7 +18,7 @@
           <label for="inputPassword">Enter Password</label>
         </div>
 
-        <div class="form-check brand-checkbox form-switch mb-3 text-start">
+        <!-- <div class="form-check brand-checkbox form-switch mb-3 text-start">
           <input type="checkbox" class="form-check-input" id="switchLoginViaOtp" v-model="loginViaOtp">
           <label class="form-check-label" for="switchLoginViaOtp">Login via Otp</label>
         </div>
@@ -26,7 +26,7 @@
         <p v-if="loginViaOtp && otpSent" class="text-start text-success pulse2">
           <i class="bi bi-info-circle pe-2"></i>
           Otp sent successfully, enter otp to login
-        </p> 
+        </p>  -->
 
         <div v-if="loginViaOtp" class="input-group mb-3">
           <div class="mb-2 mt-2n" v-if="!otpSent">Click the button below to get an otp</div>
@@ -40,12 +40,12 @@
 
       </div>
 
-      <div class="d-flex mt-2 font-app">
+      <!-- <div class="d-flex mt-2 font-app">
         <span class="pe-1">Need Account!</span>
         <router-link :to="{ name: 'Register' }" class="text-dark">Create new account</router-link>
-      </div>
+      </div> -->
 
-      <div class="d-flex justify-content-between mt-3">
+      <!-- <div class="d-flex justify-content-between mt-3">
         <button class="btn btn-sm btn-dark rounded-0" @click="loginAs('mbrand')">Brand App</button>
 
         <div class="btn-group">
@@ -70,7 +70,7 @@
           </ul>
         </div>
         
-      </div>
+      </div> -->
 
     </div>
   </div>

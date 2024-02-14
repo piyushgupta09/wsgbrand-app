@@ -4,9 +4,9 @@
             <div class="d-flex justify-content-between w-100">
 
                 <!-- Brand -->
-                <div class="d-flex flex-fill">
+                <div class="d-flex flex-fill align-items-center">
                     <div class="pe-2 me-1">
-                        <img :src="brand.logo" :alt="brand.name" width="30">
+                        <img :src="brand.logo" :alt="brand.name" width="30" style="scale: 1.5">
                     </div>
                     <div class="d-flex flex-fill flex-column justify-content-center">
                         <span class="font-title fs-5 lh-1 fw-bold">{{ brand.name }}</span>

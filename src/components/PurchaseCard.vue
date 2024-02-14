@@ -14,7 +14,7 @@
                         <span class="">Rs. {{ purchase.total.toLocaleString() }}</span>
                     </div>
                     <button class="btn btn-sm btn-outline-dark w-100 mt-2" data-bs-toggle="offcanvas" data-bs-target="#purchaseInfoModal"
-                        :data-bs-purchasedocId="purchase.doc_id" aria-controls="purchaseInfoModal"> 
+                        :data-bs-purchasedocId="purchase.doc_id + '#' + purchase.party.sid" aria-controls="purchaseInfoModal"> 
                         Show Products
                     </button>
                 </div>

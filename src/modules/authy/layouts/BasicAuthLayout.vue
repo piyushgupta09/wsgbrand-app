@@ -5,8 +5,8 @@
         <div class="col-md-5">
           <div class="d-flex flex-column justify-content-between h-100">
             <div class="d-flex flex-column justify-content-center align-items-center">
-              <img :src="brandInfo.logo" :alt="brandInfo.name" style="height: 110px; filter: saturate(450%)">
-              <div class="text-bg-dark mt-2">
+              <img :src="brandInfo.logo" :alt="brandInfo.name" style="height: 150px; filter: saturate(150%)">
+              <div class="text-bg-dark">
                 <p class="font-title px-2 fs-4 fw-bold px-1 mb-0">{{ brandInfo.name }}</p>
               </div>
               <small class="text-center font-title mt-2">{{ brandInfo.tagline }}</small>

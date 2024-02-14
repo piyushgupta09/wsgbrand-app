@@ -1,5 +1,5 @@
 <template>
-    <di class="font-title">
+    <div class="font-title">
         <OrderFilters
             :title="title"
             :filters="filters"
@@ -17,7 +17,7 @@
         </div>
         <EmptyList v-else title="No Orders Available, try adjusting filters" />
         <OrderDetails :orders="filteredOrders"  :type="prefix" />
-    </di>
+    </div>
 </template>
 
 <script>

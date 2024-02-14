@@ -84,6 +84,9 @@ export default {
         this.loadMore();
         window.addEventListener('scroll', this.handleScroll);
         this.title = this.$store.getters['authy/getPrefix'] === 'brand' ? 'Purchases' : 'Sales';
+        if (this.$route.query) {
+            this.filters.search = this.$route.query.search || '';
+        }
     },
     unmounted() {
         window.removeEventListener('scroll', this.handleScroll);

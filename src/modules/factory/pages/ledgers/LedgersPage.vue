@@ -5,7 +5,10 @@
             @order-filter-changed="handleFiltersChange" />
         
         <div class="row row-cols-2 row-cols-md-3 row-cols-xl-4 g-2">
-            <product-card v-for="(catalog, index) in filteredStocks" :key="index" :catalog="catalog" :index="index" />
+            <product-card 
+                v-for="(ledger, index) in filteredStocks" :key="index" 
+                :ledger="ledger"
+                :product="ledger.product" :productIndex="index" />
         </div>
     </div>
 </template>

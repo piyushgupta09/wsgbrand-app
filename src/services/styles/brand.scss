@@ -7,6 +7,33 @@
     color: #210000 !important;
 }
 
+.bg {
+    &-brand {
+        color: #000000;
+        background-color: #212529;
+    }
+    &-factory {
+        color: #000000;
+        background-color: #054a38;
+    }
+    &-vendor {
+        color: #000000;
+        background-color: rgb(7, 59, 72);
+    }
+}
+
+.active-link {
+    &-brand {
+        background-color: rgb(244, 92, 113) !important;
+    }
+    &-factory {
+        background-color: #047f5e !important;
+    }
+    &-vendor {
+        background-color: #1a748b !important;
+    }
+}
+
 .brand {
     &-btn-p {
         background: linear-gradient(270deg, $brand-primary, $brand-primary-light);

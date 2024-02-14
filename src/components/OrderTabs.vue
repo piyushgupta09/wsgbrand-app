@@ -1,11 +1,8 @@
 <template>
     <ul class="nav nav-pills nav-fill border-bottom">
         <li class="nav-item" v-for="link in links" :key="link.name">
-            <router-link 
-                :to="{ name: link.name }" 
-                class="nav-link rounded-0 fw-500 ls-1 small text-bg-light" 
-                :class="{ 'active text-white': isLinkActive(link.name) }"
-            >
+            <router-link :to="{ name: link.name }" class="nav-link rounded-0 fw-500 ls-1 small text-bg-light"
+                :class="[isLinkActive(link.name) ? getAppColor : '']">
                 {{ link.label }}
             </router-link>
         </li>
@@ -26,13 +23,20 @@ export default {
             return this.$route.name === routeName;
         },
     },
+    computed: {
+        prefix() {
+            return this.$store.getters['authy/getPrefix'];
+        },
+        getAppColor() {
+            switch (this.prefix) {
+                case 'factory': return 'active-link-factory text-white';
+                case 'vendor': return 'active-link-vendor text-white';
+                case 'brand': return 'active-link-brand text-white';
+                default: return 'text-bg-dark';
+            }
+        },
+    }
 }
 </script>
 
-<style lang="scss" scoped>
-@import '@/services/styles/variables.scss';
-.router-link-active.router-link-exact-active {
-    color: $brand-primary !important;
-    background-color: #ffffff !important;
-}
-</style>
+

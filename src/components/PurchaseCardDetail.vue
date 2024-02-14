@@ -17,7 +17,7 @@
         <div class="card-header p-0 d-flex justify-content-between overflow-hidden">
           <div class="d-flex align-items-center w-100">
             <img :src="group.image" class="of-cover h-60p br-tl p-2" data-bs-toggle="modal"
-              data-bs-target="#ledgerImageModal" :data-bs-url="group.preview">
+              data-bs-target="#imagePreviewModal" :data-bs-url="group.preview">
             <div class="flex-fill d-flex flex-column" data-bs-toggle="collapse"
               :href="'#collapsePurchase' + activePurchase.doc_id + '-' + groupIndex" role="button" aria-expanded="false"
               aria-controls="collapseExample">
@@ -79,8 +79,10 @@ export default {
         purchaseInfoModal.addEventListener('show.bs.offcanvas', event => {
           const button = event.relatedTarget
           const purchasedocId = button.getAttribute('data-bs-purchasedocId');
-          console.log('testtest' + this.activePurchase)
-          this.activePurchase = this.purchases.find(purchase => purchase.doc_id === purchasedocId);
+          // purchasedocId = purchase.doc_id + '#' + purchase.party.sid
+          // split purchasedocId to get purchase.doc_id and purchase.party.sid
+          const [docId, partySid] = purchasedocId.split('#');
+          this.activePurchase = this.purchases.find(purchase => purchase.doc_id === docId && purchase.party.sid === partySid);
         });
       }
     },

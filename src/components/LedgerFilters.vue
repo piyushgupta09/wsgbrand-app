@@ -200,6 +200,7 @@ export default {
             this.endDate = '';
             this.setFilterDate();
             this.emitFilters();
+            document.getElementById('ledgerFilter').classList.remove('show');
         }
     },
 }

@@ -1,5 +1,5 @@
 <template>
-    <new-orders-section module="factory" />
+    <new-orders-section module="factory" :links="[]" />
 </template>
 
 <script>

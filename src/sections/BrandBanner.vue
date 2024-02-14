@@ -3,11 +3,14 @@
 
     <div class="d-flex flex-column justify-content-evenly align-items-center h-100">
 
-      <div class="display-3 text-white text-center font-title">
+      <div class="text-white text-center font-title">
         <div class="d-flex flex-column">
-          <span class="lh-1">Welcome to</span>
-          <span class="lh-1 my-3 display-1 ls-1 fw-bold font-text ts-1 text-warning">{{ brandInfo.name }}</span>
-          <span class="lh-1 fs-4 fw-500">{{ brandInfo.tagline }}</span>
+          <div class="d-flex justify-content-center mb-3 fs-2 font-title border-bottom pb-1 border-warning pe-4" style="width: fit-content">
+            <span class="me-2 font-title">Hello,</span>
+            <span class="fw-bold font-title">{{ user.name }}</span>
+          </div>
+          <span class="fs-1 fw-bold font-title my-2">Welcome to {{ brandInfo.name }}</span>
+          <span class="lh-1 fs-5">{{ brandInfo.tagline }}</span>
         </div>
       </div>
 
@@ -76,6 +79,9 @@ export default {
   computed: {
     auth () {
       return this.$store.getters["authy/isAuthenticated"];
+    },
+    user() {
+      return this.$store.getters["authy/user"];
     },
     brandInfo () {
       return this.$store.getters["repo/info"];

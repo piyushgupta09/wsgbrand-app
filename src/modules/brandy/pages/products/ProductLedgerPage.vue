@@ -296,7 +296,7 @@ export default {
             const startDate = new Date(this.filters.startDate);
             const endDate = new Date(this.filters.endDate);
             return this.ledger.items.data.filter((item) => {
-                const createdAt = new Date(item.created_at);
+                const createdAt = new Date(item.created_on);
                 return createdAt >= startDate && createdAt <= endDate;
             });
         },

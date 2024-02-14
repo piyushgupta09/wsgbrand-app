@@ -2,16 +2,16 @@ export default {
     namespaced: true,
     state: {
         info: {
-            name: "Deshigirl",
-            tagline: "By Metro Fashion",
-            domain: "https://desigal.in",
+            name: "Wsg Brand",
+            tagline: "Empowering Brands",
+            domain: "https://app.wsgbrand.in",
             logo: require("@/assets/logo.png"),
             brand: require("@/assets/brand.png"),
             mobile: "+919999437620",
         },
         monaal: {
-            url: "http://localhost:8000",
-            // url: "https://app.monaal.in",
+            // url: "http://localhost:8000",
+            url: "https://app.monaal.in",
         },
         links: {
             topbar: [
@@ -33,11 +33,6 @@ export default {
                   icon: "bi-stack",
                   name: "Products",
                 },
-                // {
-                //   path: "BrandPurchaseOrders",
-                //   icon: "bi-box-seam",
-                //   name: "Orders",
-                // },
                 {
                   path: "BrandDashboard",
                   icon: "bi-speedometer2",

@@ -1,6 +1,6 @@
 <template>
-    <di class="font-title">
-        <OrderFilters :title="title"  :filters="filters" :statuses="statuses"  @order-filter-updated="handleFiltersChange"  />
+    <div class="font-title">
+        <OrderFilters :title="title"  :filters="filters"  @order-filter-updated="handleFiltersChange"  />
         <OrderTabs :links="links" />
         <div v-if="Object.keys(filteredOrders).length">
             <ul class="list-group list-group-flush">
@@ -22,7 +22,7 @@
             </ul>
         </div>
         <EmptyList v-else title="No Orders Available, try adjusting filters" />
-    </di>
+    </div>
 </template>
 
 <script>
