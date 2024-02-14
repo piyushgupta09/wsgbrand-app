@@ -96,7 +96,7 @@ export default {
             // Prepare the data to be sent to the backend
             const data = {
                 endpoint: endpoint,
-                AuthKeys: {
+                keys: {
                     auth: keys.auth,
                     p256dh: keys.p256dh
                 },
