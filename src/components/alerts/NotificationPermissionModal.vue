@@ -109,7 +109,7 @@ export default {
             };
 
             // Send the request to the backend
-            axios.post('http://localhost:9000/api/subscribe', data, config)
+            axios.post('https://server.wsgbrand.in/api/subscribe', data, config)
                 .then(() => {
                     // console.log('data sent', response);
                     this.state = 'none';

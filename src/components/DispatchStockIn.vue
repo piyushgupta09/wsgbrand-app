@@ -48,7 +48,7 @@
                                 <div class="fw-500 flex-fill border-bottom py-1">{{ itemRange.range }}</div>
                                 <div class="d-flex">
                                     <button class="btn btn-sm btn-outline-dark border rounded-0" type="button"
-                                        @click="decrement(item, `${item.option_sid}_${itemRange.range_sid}`)">
+                                        @click="decrement(itemRange, `${item.option_sid}_${itemRange.range_sid}`)">
                                         <i class="bi bi-dash-lg"></i>
                                     </button>
                                     <input type="number" style="width: 60px;"
@@ -56,7 +56,7 @@
                                         v-model="formData[`${item.option_sid}_${itemRange.range_sid}`]"
                                         :max="Math.round(itemRange.max_quantity)" :min="Math.round(itemRange.min_quantity)">
                                     <button class="btn btn-sm btn-outline-dark border rounded-0" type="button"
-                                        @click="increment(item, `${item.option_sid}_${itemRange.range_sid}`)">
+                                        @click="increment(itemRange, `${item.option_sid}_${itemRange.range_sid}`)">
                                         <i class="bi bi-plus-lg"></i>
                                     </button>
                                 </div>
@@ -146,6 +146,7 @@ export default {
                 this.error = 'Maximum quantity reached.';
                 this.formData[key] = Math.round(item.max_quantity);
             }
+            console.log('increment', item, key, this.formData[key]);
         },
         decrement(item, key) {
             if (this.formData[key] > Math.round(item.min_quantity)) {
@@ -154,6 +155,7 @@ export default {
                 this.error = 'Minimum quantity reached.';
                 this.formData[key] = Math.round(item.min_quantity);
             }
+            console.log('decrement', item, key, this.formData[key]);
         },
         postPurchase() {
 

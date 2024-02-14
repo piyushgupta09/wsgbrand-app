@@ -381,20 +381,27 @@ export default {
         },
         postDispatch() {
             if (this.ledger.product.options && this.total > 0) {
+
                 // Map each option option to its selected ranges and quantities
                 const quantities = this.ledger.product.options
                     .map((option, index) => {
-                        // Filter only the selected ranges for each option
-                        return this.ledger.product.ranges
+
+                        // Get selected ranges for this option
+                        const selectedRanges = this.ledger.product.ranges
                             .filter((range) => {
                                 const key = `${option.sid}_${range.sid}`;
                                 return this.formData.ranges[key]; // Check if this range is selected
-                            })
-                            .map((range) => {
-                                const key = `${option.sid}_${range.sid}`;
-                                const value = this.formData.quantity[index];
-                                return { [key]: value };
                             });
+                        
+                        // Calculate the quantity for each range, ensure it's at least 1, and round up
+                        const quantityPerRange = selectedRanges.length > 0
+                            ? Math.max(Math.ceil(this.formData.quantity[index] / selectedRanges.length), 1)
+                            : 0;
+                        
+                        return selectedRanges.map((range) => {
+                            const key = `${option.sid}_${range.sid}`;
+                            return { [key]: quantityPerRange };
+                        });
                     })
                     .flat();
 
@@ -411,7 +418,8 @@ export default {
                     }
                 });
 
-                if (totalQty > this.ledger.dispatchable_qty) {
+                console.log(totalQty, this.ledger.readyable_qty);
+                if (totalQty > this.ledger.readyable_qty) {
                     this.showQtyError(
                         "Quantity Error",
                         "Total quantity should not exceed " + this.ledger.dispatchable_qty + " pcs."

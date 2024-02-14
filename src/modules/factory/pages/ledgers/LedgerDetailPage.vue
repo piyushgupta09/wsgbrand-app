@@ -56,7 +56,7 @@
                             Total
                         </td>
                         <td class="text-start" style="min-width: 90px">
-                            {{ calculateTotal("order").toLocaleString() }}
+                            {{ calculateTotalOrder('order', ledger.items.data, 'accepted') }}
                         </td>
                         <td class="text-center" style="min-width: 90px">
                             {{ calculateTotal("ready").toLocaleString() }}
@@ -401,6 +401,14 @@ export default {
                 }
                 return total; // Otherwise, keep the total unchanged
             }, 0);
+        },
+        calculateTotalOrder(model, items, status) {
+            if (items && Array.isArray(items)) {
+                const filteredItems = items.filter((order) => (order.model === model) && this.filters[model] && (order.status === status));
+                return filteredItems.reduce((total, order) => total + order.quantity, 0);
+            } else {
+                return 0;
+            }
         },
         formatDate(dateTimeString) {
             const options = {

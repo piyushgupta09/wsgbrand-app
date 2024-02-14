@@ -14,7 +14,7 @@ const baseUrls = {
 };
 
 // You can dynamically set the environment here
-const currentEnvironment = "production";
+const currentEnvironment = "testing_alpha_v1";
 
 // Setting base url for accessing server
 Axios.defaults.baseURL = baseUrls[currentEnvironment];
