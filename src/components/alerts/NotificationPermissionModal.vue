@@ -56,7 +56,7 @@ export default {
                     .then((registration) => {
                         const subscribeOptions = {
                             userVisibleOnly: true,
-                            applicationServerKey: "BHZs-VmaHw-q81oM83ZfFkTb5jtkUCE7z0D8UNeifrDg4nshzW4e6qHfH0wnKhd_icViwN1-SrozVhEas3xa158"
+                            applicationServerKey: "BCKyDcIKu8-4in4IJ6A9-MP4RICqHiYUYOXWsi6dhwQ-TUh1XWb6NkyfPa3otzW2Vfy_I-Q-Hr4hY7-adogSDkI"
                         };
                         // console.log('Subscribing for notifications');
                         return registration.pushManager.subscribe(subscribeOptions);
