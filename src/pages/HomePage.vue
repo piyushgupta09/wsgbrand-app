@@ -27,10 +27,27 @@ export default {
     mounted() {
         window.addEventListener('resize', this.adjustHeight());
         window.addEventListener('load', this.adjustHeight());
+
+        // ?notify=new-orders?search=DG-OR-0003
+        // above query will be parsed as { notify: 'new-orders', search: 'DG-OR-0003' }
+        // parse the query and redirect to the appropriate route
+        const query = this.$route.query;
+        console.log(this.prefix, 'prefix')
+        if (this.auth && query.notify) {
+            // split the query into notify and search using ? as the delimiter
+            const [notify, searchQuery] = query.notify.split('?');
+            console.log('notify:', notify, 'search:', searchQuery);
+            var search = searchQuery.split('=')[1];
+            var path = this.prefix + '/' + notify;
+            this.$router.push({ path: path, query: { search } });
+        }
     },
     computed: {
         auth() {
             return this.$store.getters['authy/isAuthenticated'];
+        },
+        prefix() {
+            return this.$store.getters['authy/getPrefix'];
         },
     },
     methods: {

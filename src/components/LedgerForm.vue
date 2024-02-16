@@ -14,18 +14,21 @@
                 <label class="form-check-label" for="adjOrder">
                     Order Adjustment
                 </label>
+                <small class="d-block" v-if="ledger && ledger.readyable_qty && ledger.readyable_qty > 0">Max {{ ledger.readyable_qty }} pcs</small>
             </div>
             <div v-if="prefix === 'brand' && isFactoryLedger" class="form-check">
                 <input class="form-check-input" type="radio" name="flexRadioDefault" id="adjDemand" v-model="formData.adjtype" value="demand">
                 <label class="form-check-label" for="adjDemand">
                     Demand Adjustment
                 </label>
+                <small class="d-block" v-if="ledger && ledger.dispatchable_qty && ledger.dispatchable_qty > 0">Max {{ ledger.dispatchable_qty }} pcs</small>
             </div>
             <div v-if="prefix === 'factory'" class="form-check">
                 <input class="form-check-input" type="radio" name="flexRadioDefault" id="adjDemand" v-model="formData.adjtype" value="ready">
                 <label class="form-check-label" for="adjDemand">
                     Ready Adjustment
                 </label>
+                <small class="d-block" v-if="ledger && ledger.demandable_qty && ledger.demandable_qty > 0">Max {{ ledger.demandable_qty }} pcs</small>
             </div>
         </div>
 
@@ -94,6 +97,10 @@ import FormErrors from '@/components/FormErrors.vue';
 export default {
     name: 'LedgerForm',
     props: {
+        ledger: {
+            type: Object,
+            required: false,
+        },
         product: {
             type: Object,
             required: true,

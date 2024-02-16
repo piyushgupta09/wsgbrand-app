@@ -39,8 +39,7 @@ export default {
 
         channel.bind(this.pusherConfig.event, (data) => {
           // console.log('Pusher received event: ' + this.pusherConfig.event);
-        //   this.parseApiAndReloadData(data);
-          this.dispatchNotificationEvent(data);
+          this.parseApiAndReloadData(data);
         });
       }
     },
@@ -59,7 +58,13 @@ export default {
       this.$store.dispatch("noti/fetchUnreadNotifications");
       const title = data.title;
       const message = data.message;
-      SweetAlert.showSweetAlert(title, message);
+      // SweetAlert.showSweetAlert(title, message);
+      this.enableAudioAlert();
     },
+    enableAudioAlert() {
+      const bell = document.getElementById("notification-bell");
+      bell.autoplay = true;
+      bell.load();
+    }
   },
 };

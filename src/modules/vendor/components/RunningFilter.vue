@@ -58,7 +58,7 @@
                     <input v-model="tagSearch" type="search" class="form-control" placeholder="Search Stocks" />
                     <label for="floatingInput">Search by name or code</label>
                 </div>
-                <div class="form-floating mb-3">
+                <div class="form-floating">
                     <select class="form-select" v-model="filterBy" aria-label="Floating label select example">
                         <option selected value="default">Choose order stage</option>
                         <option v-for="(info, index) in filteredInfos" :key="index" :value="info.model">
@@ -67,7 +67,7 @@
                     </select>
                     <label for="floatingSelect">Filter by order stage</label>
                 </div>
-                <div class="d-flex flex-column mb-3">
+                <!-- <div class="d-flex flex-column mb-3">
                     <p class="mb-2 fw-bold">Sort By</p>
                     <div class="form-check form-switch" v-for="(sortBy, index) in sortBys" :key="index">
                         <input class="form-check-input" type="checkbox" role="switch" :id="'flexSwitchCheck' + index"
@@ -80,7 +80,7 @@
                 <div class="btn-group w-100">
                     <button class="btn btn-outline-dark" type="reset">Reset</button>
                     <button class="btn btn-outline-success" @click="emitFilters">Apply</button>
-                </div>
+                </div> -->
             </div>
         </div>
 

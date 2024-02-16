@@ -35,10 +35,14 @@ self.addEventListener("push", function (e) {
  */
 self.addEventListener("notificationclick", function (event) {
     // Assuming the action URL is stored in the notification's data
-    const notificationData = event.notification.data;
-    const actionUrl = notificationData
-        ? notificationData.url
-        : "https://app.wsgbrand.in/"; // Default URL if no data
+    const baseUrl = "https://app.wsgbrand.in/";
+    const notificationData = event.notification.data.url;
+    const query = event.notification.data.url;
+    if (query) {
+        var actionUrl = baseUrl + '?notify=' + query;
+    } else {
+        var actionUrl = baseUrl;
+    }
 
     event.notification.close(); // Closes the notification
 

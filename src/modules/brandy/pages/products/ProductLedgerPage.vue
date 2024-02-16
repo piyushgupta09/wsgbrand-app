@@ -1,5 +1,5 @@
 <template>
-    <div class="font-title">
+    <div class="font-title mb-3">
         
         <LedgerFilters 
             :product="ledger.product"
@@ -80,7 +80,7 @@
                             {{ calculateTotal("demand").toLocaleString() }}
                         </td>
                         <td v-if="isVendor" class="pe-3 text-end" style="min-width: 90px">
-                            {{ calculateTotal("demand").toLocaleString() }}
+                            {{ calculateTotal("dispatch").toLocaleString() }}
                         </td>
                     </tr>
                 </tfoot>
@@ -112,11 +112,11 @@
 
         </div>
 
-        <table class="table table-striped table-borderless">
+        <table class="table table-striped table-borderless font-app">
             <tbody>
                 <tr v-if="ledger.unaccepted" class="table-danger">
-                    <td class="ps-3">
-                        <button class="btn btn-sm btn-dark rounded-0" @click="goToOrder">
+                    <td class="ps-2">
+                        <button class="btn btn-sm btn-dark" @click="goToOrder">
                             <i class="bi bi-chevron-right"></i>
                         </button>
                         <span class="ms-3">Not Yet Accepted</span>
@@ -125,27 +125,35 @@
                         {{
                             ledger.unaccepted ? ledger.unaccepted.toLocaleString() : 0
                         }}
-                        pcs
+                        <span class="smaller">pcs</span>
                     </td>
                 </tr>
                 <tr>
-                    <td class="ps-3">
-                        <button class="btn btn-sm btn-dark rounded-0" @click="showAddOrder">
-                            <i class="bi bi-plus-lg"></i>
+                    <td class="ps-2">
+                        <button class="text-start btn btn-sm btn-dark px-1 w-90p" 
+                            @click="showAddOrder">
+                            <div class="d-flex align-items-center">
+                                <i class="pe-1 bi bi-plus fs-4 lh-1"></i>
+                                <span style="margin-left: -0.15rem">Order</span>
+                            </div>
                         </button>
-                        <span class="ms-3">In Production</span>
+                        <span class="ms-3">Order in Production</span>
                     </td>
                     <td class="pe-3 text-end">
                         {{
                             ledger.readyable_qty ? ledger.readyable_qty.toLocaleString() : 0
                         }}
-                        pcs
+                        <span class="smaller">pcs</span>
                     </td>
                 </tr>
                 <tr v-if="isFactoryLedger">
-                    <td class="ps-3">
-                        <button class="btn btn-sm btn-dark rounded-0" @click="showAddDemand">
-                            <i class="bi bi-plus-lg"></i>
+                    <td class="ps-2">
+                        <button class="text-start btn btn-sm btn-dark px-1 w-90p" 
+                            @click="showAddDemand">
+                            <div class="d-flex align-items-center">
+                                <i class="pe-1 bi bi-plus fs-4 lh-1"></i>
+                                <span style="margin-left: -0.15rem">Demand</span>
+                            </div>
                         </button>
                         <span class="ms-3">Ready for Demand</span>
                     </td>
@@ -155,19 +163,23 @@
                             ? ledger.demandable_qty.toLocaleString()
                             : 0
                         }}
-                        pcs
+                        <span class="smaller">pcs</span>
                     </td>
                 </tr>
                 <tr>
-                    <td class="ps-3">
-                        <button class="btn btn-sm btn-dark rounded-0" @click="showAddAdjustment">
-                            <i class="bi bi-plus-lg"></i>
+                    <td class="ps-2">
+                        <button v-if="!isVendor" class="text-start btn btn-sm btn-dark px-1 w-90p" 
+                            @click="showAddAdjustment">
+                            <div class="d-flex align-items-center">
+                                <i class="pe-1 bi bi-plus fs-4 lh-1"></i>
+                                <span style="margin-left: -0.15rem">Adjust</span>
+                            </div>
                         </button>
-                        <span class="ms-3">Ledger Balance</span>
+                        <span class="ms-3">Ledger Balance Qty</span>
                     </td>
                     <td class="pe-3 text-end">
                         {{ ledger.balance_qty ? ledger.balance_qty.toLocaleString() : 0 }}
-                        pcs
+                        <span class="smaller">pcs</span>
                     </td>
                 </tr>
             </tbody>
@@ -198,7 +210,7 @@
                     </div>
                 </form>
                 <form v-if="addAdjustment" @submit.prevent="postAdjustment()" method="post">
-                    <LedgerForm :product="ledger.product" type="adjustment" @formData="handleFormData" :isFactoryLedger="isFactoryLedger" />
+                    <LedgerForm :product="ledger.product" :ledger="ledger" type="adjustment" @formData="handleFormData" :isFactoryLedger="isFactoryLedger" />
                     <div class="btn-group w-100">
                         <button class="btn btn-sm btn-outline-dark fw-bold" type="button" @click="showLedgerSummary">
                             Cancel
@@ -232,7 +244,7 @@ import LedgerInfo from "@/components/LedgerInfo.vue";
 import LedgerForm from "@/components/LedgerForm.vue";
 
 export default {
-    name: "ProductLedgerPage",
+    name: "FactoryLedger",
     props: {
         module: {
             type: String,
@@ -430,7 +442,7 @@ export default {
             };
         },
         shouldShow(ledgerItem) {
-            if (ledgerItem.model === 'dispatch') {
+            if (this.ledger.party_id.type !== 'Product Vendor' && ledgerItem.model === 'dispatch') {
                 return false;
             }
 

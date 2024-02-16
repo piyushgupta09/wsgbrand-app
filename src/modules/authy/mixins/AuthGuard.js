@@ -1,20 +1,18 @@
 import Cookies from 'js-cookie';
 
 export function beforeEnterRoute(to, from, next) {
-    const isAuth = localStorage.getItem('auth') === 'true' || Cookies.get('auth') === 'true';
-    const isVerified = localStorage.getItem('verified') === 'true' || Cookies.get('verified') === 'true';
+    // Simplify authentication and verification checks
+    const isAuth = ['true', true].includes(localStorage.getItem('auth')) || Cookies.get('auth') === 'true';
+    const isVerified = ['true', true].includes(localStorage.getItem('verified')) || Cookies.get('verified') === 'true';
 
     if (!isAuth) {
-        // Redirect to Login if not authenticated
         console.log('Redirect to Login');
-        next({ name: 'Login' });
-    } else if (isAuth && !isVerified) {
-        // Redirect to Verify if authenticated but not verified
+        next({ name: 'Login' }); // Redirect user to Login route if not authenticated
+    } else if (!isVerified) {
         console.log('Redirect to Verify');
-        next({ name: 'VerifyEmail' });
-    } else if (isAuth && isVerified) {
-        // Proceed if authenticated and verified
+        next({ name: 'VerifyEmail' }); // Redirect user to VerifyEmail route if not verified
+    } else {
         console.log('Proceed');
-        next();
+        next(); // If authenticated and verified, proceed with the current routing
     }
 }

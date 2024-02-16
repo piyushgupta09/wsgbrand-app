@@ -92,26 +92,34 @@
 
         </div>
 
-        <table class="table table-striped table-borderless">
+        <table class="table table-striped table-borderless font-app">
             <tbody>
                 <tr>
-                    <td class="ps-3">
-                        <button class="btn btn-sm btn-dark rounded-0" @click="showAddReady">
-                            <i class="bi bi-plus-lg"></i>
+                    <td class="ps-2">
+                        <button class="text-start btn btn-sm btn-dark px-1 w-90p" 
+                            @click="showAddReady">
+                            <div class="d-flex align-items-center">
+                                <i class="pe-1 bi bi-plus fs-4 lh-1"></i>
+                                <span style="margin-left: -0.15rem">Ready</span>
+                            </div>
                         </button>
-                        <span class="ms-3">In Production</span>
+                        <span class="ms-3">Order in Production</span>
                     </td>
                     <td class="pe-3 text-end">
                         {{
                             ledger.readyable_qty ? ledger.readyable_qty.toLocaleString() : 0
                         }}
-                        pcs
+                        <span class="smaller">pcs</span>
                     </td>
                 </tr>
                 <tr>
-                    <td class="ps-3">
-                        <button class="btn btn-sm btn-dark rounded-0" @click="showAddDispatch">
-                            <i class="bi bi-plus-lg"></i>
+                    <td class="ps-2">
+                        <button class="text-start btn btn-sm btn-dark px-1 w-90p" 
+                            @click="showAddDispatch">
+                            <div class="d-flex align-items-center">
+                                <i class="pe-1 bi bi-plus fs-4 lh-1"></i>
+                                <span style="margin-left: -0.15rem">Dispatch</span>
+                            </div>
                         </button>
                         <span class="ms-3">Demand Raised</span>
                     </td>
@@ -121,19 +129,23 @@
                             ? ledger.dispatchable_qty.toLocaleString()
                             : 0
                         }}
-                        pcs
+                        <span class="smaller">pcs</span>
                     </td>
                 </tr>
                 <tr>
-                    <td class="ps-3">
-                        <button class="btn btn-sm btn-dark rounded-0" @click="showAddAdjustment">
-                            <i class="bi bi-plus-lg"></i>
+                    <td class="ps-2">
+                        <button class="text-start btn btn-sm btn-dark px-1 w-90p" 
+                            @click="showAddAdjustment">
+                            <div class="d-flex align-items-center">
+                                <i class="pe-1 bi bi-plus fs-4 lh-1"></i>
+                                <span style="margin-left: -0.15rem">Adjust</span>
+                            </div>
                         </button>
-                        <span class="ms-3">Ledger Balance</span>
+                        <span class="ms-3">Ledger Balance Qty</span>
                     </td>
                     <td class="pe-3 text-end">
                         {{ ledger.balance_qty ? ledger.balance_qty.toLocaleString() : 0 }}
-                        pcs
+                        <span class="smaller">pcs</span>
                     </td>
                 </tr>
             </tbody>
@@ -164,7 +176,7 @@
                     </div>
                 </form>
                 <form v-if="addAdjustment" @submit.prevent="postAdjustment()" method="post">
-                    <LedgerForm :product="ledger.product" type="adjustment" @formData="handleFormData" />
+                    <LedgerForm :product="ledger.product" :ledger="ledger" type="adjustment" @formData="handleFormData" />
                     <div class="btn-group w-100">
                         <button class="btn btn-sm btn-outline-dark fw-bold" type="button" @click="showLedgerSummary">
                             Cancel

@@ -17,8 +17,14 @@
                 <!-- Notification Bell & Profile Icon -->
                 <div class="d-flex align-items-center justify-content-end">
                     <button v-if="pusherConfig" class="btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNotifications"
-                        aria-controls="offcanvasNotifications">
-                        <i v-if="hasNotifications" class="bi bi-bell-fill text-danger fs-5"></i>
+                        aria-controls="offcanvasNotifications">                        
+                        <div v-if="hasNotifications" class="d-flex justify-content-around align-items-center">
+                            <i class="bi bi-bell-fill text-danger fs-5 lh-1"></i>
+                            <span class="ms-2 badge text-bg-danger badge-sm rounded-pill">
+                                {{ unreadNotificationsCount }}
+                                <span class="visually-hidden">unread messages</span>
+                            </span>
+                        </div>
                         <i v-else class="bi bi-bell fs-5"></i>
                     </button>
                     <button v-else class="btn">
@@ -75,6 +81,9 @@ export default {
         },
         hasNotifications() {
             return this.$store.getters['noti/hasNotifications'];
+        },
+        unreadNotificationsCount() {
+            return this.$store.getters['noti/unreadNotifications'].length;
         },
     },
 }

@@ -55,7 +55,7 @@
                             Total
                         </td>
                         <td class="text-start" style="min-width: 90px">
-                            {{ calculateTotal("order").toLocaleString() }}
+                            {{ calculateTotalOrder('order', ledger.items.data, 'accepted') }}
                         </td>
                         <td class="pe-3 text-end" style="min-width: 90px">
                             {{ calculateTotal("dispatch").toLocaleString() }}
@@ -89,46 +89,34 @@
 
         <table class="table table-striped table-borderless">
             <tbody>
-                <tr>
-                    <td class="ps-3">
-                        <router-link :to="{ name: 'VendorOrders'}" class="btn btn-sm btn-dark rounded-0">
+                <tr v-if="ledger.unaccepted" class="table-danger">
+                    <td class="ps-2">
+                        <router-link :to="{ name: 'VendorOrders'}" class="btn btn-sm btn-dark">
                             <i class="bi bi-chevron-left"></i>
                         </router-link>
-                        <span class="ms-3">Order Pending</span>
+                        <span class="ms-3">Not Yet Accepted</span>
                     </td>
                     <td class="pe-3 text-end">
                         {{
-                            ledger.readyable_qty ? ledger.readyable_qty.toLocaleString() : 0
+                            ledger.unaccepted ? ledger.unaccepted.toLocaleString() : 0
                         }}
-                        pcs
+                        <span class="smaller">pcs</span>
                     </td>
                 </tr>
                 <tr>
-                    <td class="ps-3">
-                        <button class="btn btn-sm btn-dark rounded-0" @click="showAddDispatch">
-                            <i class="bi bi-plus-lg"></i>
+                    <td class="ps-2">
+                        <button class="text-start btn btn-sm btn-dark px-1 w-90p" 
+                            @click="showAddDispatch">
+                            <div class="d-flex align-items-center">
+                                <i class="pe-1 bi bi-plus fs-4 lh-1"></i>
+                                <span style="margin-left: -0.15rem">Dispatch</span>
+                            </div>
                         </button>
-                        <span class="ms-3">Dispatch Pending</span>
-                    </td>
-                    <td class="pe-3 text-end">
-                        {{
-                            ledger.dispatchable_qty
-                            ? ledger.dispatchable_qty.toLocaleString()
-                            : 0
-                        }}
-                        pcs
-                    </td>
-                </tr>
-                <tr>
-                    <td class="ps-3">
-                        <button class="btn btn-sm btn-dark rounded-0" @click="showAddAdjustment">
-                            <i class="bi bi-plus-lg"></i>
-                        </button>
-                        <span class="ms-3">Ledger Balance</span>
+                        <span class="ms-3">Ledger Balance Qty</span>
                     </td>
                     <td class="pe-3 text-end">
                         {{ ledger.balance_qty ? ledger.balance_qty.toLocaleString() : 0 }}
-                        pcs
+                        <span class="smaller">pcs</span>
                     </td>
                 </tr>
             </tbody>
@@ -366,6 +354,14 @@ export default {
                 }
                 return total; // Otherwise, keep the total unchanged
             }, 0);
+        },
+        calculateTotalOrder(model, items, status) {
+            if (items && Array.isArray(items)) {
+                const filteredItems = items.filter((order) => (order.model === model) && this.filters[model] && (order.status === status));
+                return filteredItems.reduce((total, order) => total + order.quantity, 0);
+            } else {
+                return 0;
+            }
         },
         formatDate(dateTimeString) {
             const options = {

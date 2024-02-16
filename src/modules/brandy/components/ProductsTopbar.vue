@@ -158,6 +158,7 @@ export default {
             this.emitFilters();
         },
         emitFilters() {
+            this.closeOffcanvas();
             this.$emit('product-filter-updated', {
                 search: this.search,
                 sortAsc: this.sortAsc,
@@ -167,7 +168,10 @@ export default {
                 selectedRange: this.selectedRange,
             });
         },
+        closeOffcanvas() {
+            document.getElementById('offcanvasSearch').classList.remove('show');
+            document.getElementById('offcanvasFilter').classList.remove('show');
+        }
     }
-
 }
 </script>

@@ -5,6 +5,9 @@
     <router-view />
     <AppToast />
     <ImagePreviewModal />
+    <audio id="notification-bell" :src="audioSource" style="height: 0px">
+      Your browser does not support the audio element.
+    </audio>
   </div>
 </template>
 
@@ -23,7 +26,7 @@ export default {
     this.adjustViewport();
     window.addEventListener('resize', this.adjustViewport);
   },
-  destroyed() {
+  unmounted() {
     window.removeEventListener('resize', this.adjustViewport);
   },
   methods: {
@@ -32,6 +35,11 @@ export default {
       const vw = window.innerWidth * 0.01;
       document.documentElement.style.setProperty('--vh', `${vh}px`);
       document.documentElement.style.setProperty('--vw', `${vw}px`);
+    },
+  },
+  computed: {
+    audioSource() {
+      return require('@/assets/notification.mp3');
     },
   },
 };
